@@ -126,9 +126,9 @@ html {
 /* nav menu */
 .nav-menu {
     height: calc(100% - 135px);
-    margin: 5px;
 }
 
+/* nav menu search */
 .nav-menu-search {
     height: 40px;
     background-color: white;
@@ -136,6 +136,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 5px;
 }
 
 .nav-menu-search i {
@@ -150,9 +151,74 @@ html {
     outline: none;
 }
 
+/* nav menu chat */
 .nav-menu-chats {
-    height: calc(100% - 40px);
+    height: calc(100% - 50px);
     overflow-y: auto;
+    background-color: rgb(247, 242, 242);
+}
+
+.nav-menu-chats ul {
+    list-style: none;
+}
+
+.nav-menu-item {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.nav-menu-item:hover {
+    background-color: rgb(228, 228, 228);
+    cursor: pointer;
+}
+.nav-menu-item.selected {
+    background-color: gray;
+}
+
+.menu-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 5px;
+}
+.menu-avatar img {
+    width: 100%;
+}
+
+.menu-info {
+    width: 90%;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.row-name-time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row-name-time .name {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.row-name-time .time {
+    font-size: .8em;
+    font-weight: 400;
+    color: var(--gray-color);
+}
+
+.row-message {
+    width: 100%;
+}
+
+.row-message .message-text {
+    font-size: .9em;
+    font-weight: 400;
+    color: var(--gray-color);
 }
 
 /* chat */
