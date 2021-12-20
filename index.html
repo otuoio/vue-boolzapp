@@ -58,7 +58,7 @@
 
                     <div class="nav-menu-chats">
                         <ul>
-                            <li @click="add(index)" v-for="(contact, index) in contacts" class="nav-menu-item">
+                            <li @click="add(index)" :class="(index == counter) ? 'selected' : '' " v-for="(contact, index) in contacts" class="nav-menu-item">
                                 <div class="menu-avatar">
                                     <img :src='`img/avatar${contact.avatar}.jpg`' :alt='`${contact.name}`'>
                                 </div>
