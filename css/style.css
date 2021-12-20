@@ -3,6 +3,7 @@
     --bg-gray:#DBDAD2;
     --bg-lightgray: #EAEAEA;
     --bg-azure: #8EDAFC;
+    --gray-color:#B1B1B1;
 }
 
 * {
@@ -50,11 +51,42 @@ html {
     background-color: white;
 }
 
+/* nav header */
 .nav-header {
     height: 60px;
     background-color: var(--bg-lightgray);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
+.my-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 5px;
+}
+
+.my-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.tool-bar {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    color: var(--gray-color);
+    font-size: 1.2em;
+    margin-right: 5px;
+}
+
+.tool-bar i:hover {
+    cursor: pointer;
+}
+
+/* nav-activate */
 .nav-activate {
     height: 75px;
     background-color: var(--bg-azure);
