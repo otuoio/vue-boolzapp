@@ -328,7 +328,26 @@ html {
     align-self: flex-start;
 }
 
+/* CHAT TEXT BOX */
 .chat-text {
     height: 60px;
     background-color: var(--bg-lightgray);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.chat-text i {
+    width: auto;
+    font-size: 1.2em;
+    color: gray;
+}
+
+.chat-text input {
+    width: 75%;
+    outline: none;
+    border-style: none;
+    height: 70%;
+    border-radius: 5px;
+    padding-left: 10px;
 }
