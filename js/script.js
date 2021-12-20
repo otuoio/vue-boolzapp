@@ -138,7 +138,7 @@ const app = new Vue (
                         },
                         {
                             date: "10/01/2020 15:50:00",
-                            text: "Si, ma preferirei andare al cinema",
+                            text: "Si, ma preferirei un falafel",
                             status: "received",
                         },
                     ],

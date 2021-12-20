@@ -100,7 +100,7 @@
                 <div class="chat-content">
                     <div v-for="(message, index) in contacts[counter].messages" :class="(message.status == 'received') ? 'received' : 'sent' " class="message-box">
                         <p>{{ message.text }}</p>
-                        <span class="time">{{ contacts[counter].messages[(contacts[counter].messages.length - 1)].date.substr(11, 5) }}</span>
+                        <span class="time-message">{{ contacts[counter].messages[(contacts[counter].messages.length - 1)].date.substr(11, 5) }}</span>
                     </div>
                 </div>
 
