@@ -95,7 +95,9 @@ const app = new Vue (
             ]
         },
         methods: {
-            
+            add: function(index) {
+                this.counter = index;
+            }
         }
     }
 );
