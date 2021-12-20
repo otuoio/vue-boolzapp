@@ -80,7 +80,22 @@
 
             <!-- side chat -->
             <div class="chat">
-                <div class="chat-header"></div>
+                <div class="chat-header">
+                    <div class="chat-avatar-info">
+                        <div class="chat-avatar">
+                            <img :src='`img/avatar${contacts[counter].avatar}.jpg`' alt='`${contacts[counter].name}`'>
+                        </div>
+                        <div class="chat-info">
+                            <h4 class="name">{{ contacts[counter].name }}</h4>
+                            <span class="last-acces">Ultimo accesso: {{ contacts[counter].messages[(contacts[0].messages.length - 1)].date }}</span>
+                        </div>
+                    </div>
+                    <div class="chat-tool-bar">
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
                 
                 <div class="chat-content"></div>
 
