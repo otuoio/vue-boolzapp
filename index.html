@@ -23,7 +23,7 @@
     <title>Boolzapp</title>
 </head>
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <div class="chat-container clearfix">
 
             <!-- side navbar -->
@@ -58,17 +58,17 @@
 
                     <div class="nav-menu-chats">
                         <ul>
-                            <li class="nav-menu-item">
+                            <li v-for="(contact, index) in contacts" class="nav-menu-item">
                                 <div class="menu-avatar">
-                                    <img src="img/avatar_1.jpg" alt="Michele">
+                                    <img :src='`img/avatar${contact.avatar}.jpg`' :alt='`${contact.name}`'>
                                 </div>
                                 <div class="menu-info">
                                     <div class="row-name-time">
-                                        <h4 class="name">Michele</h4>
-                                        <span class="time">17:10</span>
+                                        <h4 class="name">{{ contact.name }}</h4>
+                                        <span  class="time">{{ contact.messages[(contact.messages.length - 1)].date }}</span>
                                     </div>
                                     <div class="row-message">
-                                        <p class="message-text">ok</p>
+                                        <p class="message-text">{{  contact.messages[(contact.messages.length - 1)].text }}</p>
                                     </div>
                                 </div>
                             </li>
