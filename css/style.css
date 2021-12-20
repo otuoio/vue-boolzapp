@@ -48,7 +48,7 @@ html {
     width: 40%;
     float: left;
     border-right: 1px solid lightgray;
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 /* nav header */
@@ -126,12 +126,28 @@ html {
 /* nav menu */
 .nav-menu {
     height: calc(100% - 135px);
-    background-color: lightgreen;
+    margin: 5px;
 }
 
 .nav-menu-search {
     height: 40px;
-    background-color: tomato;
+    background-color: white;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu-search i {
+    color: var(--gray-color);
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+.nav-menu-search input {
+    width: 85%;
+    border-style: none;
+    outline: none;
 }
 
 .nav-menu-chats {
