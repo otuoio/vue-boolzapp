@@ -263,7 +263,7 @@ html {
     width: 80%;
 }
 
-.chat-info .name {
+.name {
     font-size: 1em;
     font-weight: 400;
 }
@@ -290,6 +290,7 @@ html {
 /* CHAT CONTENT */
 .chat-content {
     height: calc(100% - 120px);
+    overflow-y: auto;
     background-image: url(../img/mine.jpg);
     background-position: center;
     background-repeat: repeat;

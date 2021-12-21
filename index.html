@@ -23,6 +23,7 @@
     <title>Boolzapp</title>
 </head>
 <body>
+
     <div id="app" class="container">
         <div class="chat-container clearfix">
 
@@ -32,6 +33,7 @@
                     <div class="my-avatar">
                         <img src="img/avatar_io.jpg" alt="">
                     </div>
+                    <h4 class="name">Nome Utente</h4>
                     <div class="tool-bar">
                         <i class="fas fa-circle-notch"></i>
                         <i class="fas fa-comment-alt"></i>
@@ -53,7 +55,7 @@
 
                     <div class="nav-menu-search">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchChat">
                     </div>
 
                     <div class="nav-menu-chats">
@@ -106,7 +108,7 @@
 
                 <div class="chat-text">
                     <i class="far fa-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio">
+                    <input type="text" placeholder="Scrivi un messaggio" v-model="newMsg">
                     <i class="fas fa-microphone"></i>
                 </div>
             </div>
