@@ -171,6 +171,25 @@ const app = new Vue (
         methods: {
             add: function(index) {
                 this.counter = index;
+            },
+            newMessage: function(array) {
+    
+                // let dateTime = new Date()
+                // console.log(dateTime);
+    
+                let obj = {
+                    date: '19:00',
+                    text: this.newMsg,
+                    status: "sent"
+                };
+
+                const obj2 = {
+                    date: '19:00',
+                    text: 'ok bella',
+                    status: "received"
+                };
+    
+                array.push(obj, obj2);
             }
         }
     }
