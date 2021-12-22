@@ -55,12 +55,12 @@
 
                     <div class="nav-menu-search">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchChat">
+                        <input @keyup="search" type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchChat">
                     </div>
 
                     <div class="nav-menu-chats">
                         <ul>
-                            <li @click="add(index)" :class="(index == counter) ? 'selected' : '' " v-for="(contact, index) in contacts" class="nav-menu-item">
+                            <li v-show="contact.visible" @click="add(index)" :class="(index == counter) ? 'selected' : '' " v-for="(contact, index) in contacts" class="nav-menu-item">
                                 <div class="menu-avatar">
                                     <img :src='`img/avatar${contact.avatar}.jpg`' :alt='`${contact.name}`'>
                                 </div>

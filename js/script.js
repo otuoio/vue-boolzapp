@@ -10,6 +10,9 @@
 // Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
 // Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
 
+// Milestone 4
+// Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite(es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
+
 
 const app = new Vue (
     {
@@ -201,6 +204,36 @@ const app = new Vue (
                 }, 1000);
 
                 this.newMsg = '';
+            },
+            search: function () { // Milestone 4
+
+                // imposto visible true di default
+                this.contacts.forEach((contact, index) => {
+                    contact.visible = true;
+                });
+
+                // creazione array con soli nomi
+                let namesArray = this.contacts.map((contact) => {
+
+                    return contact.name;
+
+                });
+                
+                // creazione array dei nomi filtrati tramite la barra di ricerca
+                let filteredNames = [];
+
+                namesArray.forEach((element, index) => {
+                    if (element.toLowerCase().includes(this.searchChat.toLowerCase())) {
+                        filteredNames.push(element);
+                    }
+                });
+
+                // cambio variabile visible ai contact che non sono presenti nell'array filtrato
+                this.contacts.forEach((contact, index) => {
+                    if (!filteredNames.includes(contact.name)) {
+                        contact.visible = false;
+                    };
+                });
             }
         },
         created() {
