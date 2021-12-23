@@ -311,6 +311,44 @@ html {
     position: relative;
 }
 
+.tools-message {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: .7em;
+    font-weight: 400;
+}
+.tools-message:hover {
+    cursor: pointer;
+}
+
+.info-box {
+    width: 150px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 2px 2px #888888;
+    position: absolute;
+    top: 60%;
+    right: 10px;
+    z-index: 2;
+}
+
+.info-box ul {
+    list-style: none;
+}
+
+.info-box ul li {
+    font-size: .8em;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.info-box ul li:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
 .time-message {
     position: absolute;
     bottom: 4px;

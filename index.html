@@ -67,10 +67,10 @@
                                 <div class="menu-info">
                                     <div class="row-name-time">
                                         <h4 class="name">{{ contact.name }}</h4>
-                                        <span  class="time">{{ contact.messages[(contact.messages.length - 1)].date.substr(11, 5) }}</span>
+                                        <span class="time">{{ timeLive(contact).substr(11, 5) }}</span>
                                     </div>
                                     <div class="row-message">
-                                        <p class="message-text">{{  contact.messages[(contact.messages.length - 1)].text }}</p>
+                                        <p class="message-text">{{  textLive(contact) }}</p>
                                     </div>
                                 </div>
                             </li>
@@ -89,7 +89,7 @@
                         </div>
                         <div class="chat-info">
                             <h4 class="name">{{ contacts[counter].name }}</h4>
-                            <span class="last-acces">Ultimo accesso oggi alle {{ contacts[counter].messages[(contacts[counter].messages.length - 1)].date.substr(11, 5) }}</span>
+                            <span class="last-acces">Ultimo accesso oggi alle {{ timeLive(contacts[counter]).substr(11, 5) }}</span>
                         </div>
                     </div>
                     <div class="chat-tool-bar">
@@ -101,6 +101,13 @@
                 
                 <div class="chat-content">
                     <div v-for="(message, index) in contacts[counter].messages" :class="(message.status == 'received') ? 'received' : 'sent' " class="message-box">
+                        <span @click="message.showInfo = !message.showInfo" class="tools-message"><i class="fas fa-angle-down"></i></span>
+                        <div v-show="message.showInfo" class="info-box">
+                            <ul>
+                                <li>Info messaggio</li>
+                                <li @click="deleteMsg(contacts[counter].messages, index)">Elimina messaggio</li>
+                            </ul>
+                        </div>
                         <p>{{ message.text }}</p>
                         <span class="time-message">{{ contacts[counter].messages[index].date.substr(11, 5) }}</span>
                     </div>
