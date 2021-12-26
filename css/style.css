@@ -390,3 +390,10 @@ html {
     border-radius: 5px;
     padding-left: 10px;
 }
+
+.chat-text .send-msg {
+    color: var(--bg-azure);
+}
+.chat-text .send-msg:hover {
+    cursor: pointer;
+}
