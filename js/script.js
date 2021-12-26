@@ -17,6 +17,7 @@
 // Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
 // Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
 
+// BONUS 1 - evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
 
 
 const app = new Vue (
@@ -206,30 +207,34 @@ const app = new Vue (
             },
             newMessage: function (array) {// Milestone 3
     
-                let dateTime = new Date();
+                if (this.newMsg.trim().length > 0) {// BONUS 1 - evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
 
+                    let dateTime = new Date();
     
-                let obj = {
-                    date: dateTime.toString().substr(5, 18),
-                    text: this.newMsg,
-                    status: "sent",
-                    showInfo: false
-                };
-
-                const obj2 = {
-                    date: dateTime.toString().substr(5, 18),
-                    text: 'ok bella',
-                    status: "received",
-                    showInfo: false
-                };
+        
+                    let obj = {
+                        date: dateTime.toString().substr(5, 18),
+                        text: this.newMsg,
+                        status: "sent",
+                        showInfo: false
+                    };
     
-                array.push(obj);
-
-                setTimeout(() => {
-                    array.push(obj2);
-                }, 1000);
-
-                this.newMsg = '';
+                    const obj2 = {
+                        date: dateTime.toString().substr(5, 18),
+                        text: 'ok bella',
+                        status: "received",
+                        showInfo: false
+                    };
+        
+                    array.push(obj);
+    
+                    setTimeout(() => {
+                        array.push(obj2);
+                    }, 1000);
+    
+                    this.newMsg = '';
+                }
+                
             },
             search: function () { // Milestone 4
 
@@ -261,11 +266,11 @@ const app = new Vue (
                     };
                 });
             },
-            deleteMsg: function(array, index) {
+            deleteMsg: function (array, index) { // Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
                 
                 array.splice(index, 1);
             },
-            textLive: function(contact) {
+            textLive: function (contact) {// Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
 
                 let textMsg = '';
 
