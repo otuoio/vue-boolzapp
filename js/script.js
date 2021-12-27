@@ -23,6 +23,10 @@
 
 //BONUS 3 - predisporre una lista di frasi e/o citazioni da utilizzare al posto della risposta "ok:" quando il pc risponde, anziché scrivere "ok", scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
 
+//BONUS 4 - visualizzare nella lista dei contatti l'ultimo messaggio inviato/ricevuto da ciascun contatto
+
+//BONUS 5 - inserire l'orario corretto nei messaggi
+
 const app = new Vue (
     {
         el: '#app',
