@@ -21,6 +21,7 @@
 
 //BONUS 2 - A) cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio) finché l'utente sta scrivendo: di default si visualizza l'icona del microfono, quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono. B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano
 
+//BONUS 3 - predisporre una lista di frasi e/o citazioni da utilizzare al posto della risposta "ok:" quando il pc risponde, anziché scrivere "ok", scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
 
 const app = new Vue (
     {
@@ -29,6 +30,15 @@ const app = new Vue (
             counter: 0,
             searchChat: '',
             newMsg: '',
+            //predisporre una lista di frasi e/o citazioni
+            pcAnswers: [
+                'vai a mangiare il sapone',
+                'non ci pensare',
+                'cosa?',
+                'chiamami quando puoi',
+                'non ti va mai bene niente',
+                'salutameli'
+            ],
             contacts: [
                 {
                     name: "Michele",
@@ -212,18 +222,30 @@ const app = new Vue (
                 if (this.newMsg.trim().length > 0) {// BONUS 1 - evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
 
                     let dateTime = new Date();
-    
-        
+
                     let obj = {
                         date: dateTime.toString().substr(5, 18),
                         text: this.newMsg,
                         status: "sent",
                         showInfo: false
                     };
-    
+                    
+                    //scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
+
+                    // creare funzione che seleziona un indice random
+                    
+                    function getRandomIntInclusive(min, max) {
+                        min = Math.ceil(min);
+                        max = Math.floor(max);
+                        return Math.floor(Math.random() * (max - min + 1) + min);
+                    }
+
+                    // creare variabile che contiene l'elemento random selezionato
+                    const answer = this.pcAnswers[getRandomIntInclusive(0, this.pcAnswers.length - 1)];
+
                     const obj2 = {
                         date: dateTime.toString().substr(5, 18),
-                        text: 'ok bella',
+                        text: answer,
                         status: "received",
                         showInfo: false
                     };
