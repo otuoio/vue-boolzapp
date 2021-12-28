@@ -91,7 +91,11 @@
                         </div>
                         <div class="chat-info">
                             <h4 class="name">{{ contacts[counter].name }}</h4>
-                            <span class="last-acces">Ultimo accesso oggi alle {{ timeLive(contacts[counter]).substr(11, 5) }}</span>
+                            <!-- BONUS 6 - sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il
+                            testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e
+                            infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto -->
+                            <span v-show="contacts[counter].writingOnline" class="last-acces">{{ accessText }}</span>
+                            <span v-show="contacts[counter].accessVisible" class="last-acces">Ultimo accesso oggi alle {{ timeLive(contacts[counter]).substr(11, 5) }}</span>
                         </div>
                     </div>
                     <div class="chat-tool-bar">
@@ -117,11 +121,11 @@
 
                 <div class="chat-text">
                     <i class="far fa-smile"></i>
-                    <input @keyup.enter="newMessage(contacts[counter].messages)" type="text" placeholder="Scrivi un messaggio" v-model="newMsg">
+                    <input @keyup.enter="newMessage(contacts[counter].messages), access(contacts[counter])" type="text" placeholder="Scrivi un messaggio" v-model="newMsg">
 
                     <!-- BONUS 2 - A) cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio) finché l'utente sta scrivendo: di default si visualizza l'icona del microfono, quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono. B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano -->
 
-                    <i @click="newMessage(contacts[counter].messages)" v-if="newMsg.trim().length > 0" class="fas send-msg fa-paper-plane"></i>
+                    <i @click="newMessage(contacts[counter].messages), access(contacts[counter])" v-if="newMsg.trim().length > 0" class="fas send-msg fa-paper-plane"></i>
                     <i v-else class="fas fa-microphone"></i>
                 </div>
             </div>

@@ -27,6 +27,8 @@
 
 //BONUS 5 - inserire l'orario corretto nei messaggi
 
+//BONUS 6 - sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
+
 const app = new Vue (
     {
         el: '#app',
@@ -34,6 +36,7 @@ const app = new Vue (
             counter: 0,
             searchChat: '',
             newMsg: '',
+            accessText: '',
             //predisporre una lista di frasi e/o citazioni
             pcAnswers: [
                 'vai a mangiare il sapone',
@@ -48,6 +51,8 @@ const app = new Vue (
                     name: "Michele",
                     avatar: "_1",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "10/01/2020 15:30:55",
@@ -73,6 +78,8 @@ const app = new Vue (
                     name: "Fabio",
                     avatar: "_2",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "20/03/2020 16:30:00",
@@ -99,6 +106,8 @@ const app = new Vue (
                     name: "Samuele",
                     avatar: "_3",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "28/03/2020 10:10:40",
@@ -124,6 +133,8 @@ const app = new Vue (
                     name: "Luisa",
                     avatar: "_4",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "10/01/2020 15:30:55",
@@ -143,6 +154,8 @@ const app = new Vue (
                     name: "Andonio",
                     avatar: "_5",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "10/01/2020 15:30:55",
@@ -162,6 +175,8 @@ const app = new Vue (
                     name: "Peppe",
                     avatar: "_6",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "10/01/2020 15:30:55",
@@ -181,6 +196,8 @@ const app = new Vue (
                     name: "Falafel",
                     avatar: "_7",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "10/01/2020 15:30:55",
@@ -200,6 +217,8 @@ const app = new Vue (
                     name: "She",
                     avatar: "_8",
                     visible: true,
+                    accessVisible: true,
+                    writingOnline: false,
                     messages: [
                         {
                             date: "10/01/2020 15:30:55",
@@ -258,11 +277,36 @@ const app = new Vue (
     
                     setTimeout(() => {
                         array.push(obj2);
-                    }, 1000);
+                    }, 4000);
     
                     this.newMsg = '';
                 }
                 
+            },
+            access: function (contact) { //BONUS 6 - sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
+                
+                setTimeout(() => {
+                    
+                    contact.accessVisible = false;
+    
+                    contact.writingOnline = true;
+
+                    this.accessText = 'sta scrivendo...';
+
+                    setTimeout(() => {
+                        
+                        this.accessText = 'online';
+
+                        setTimeout(() => {
+                            contact.accessVisible = true;
+
+                            contact.writingOnline = false;
+                        }, 2000);
+
+                    }, 3000);
+
+                }, 1000);
+
             },
             search: function () { // Milestone 4
 
