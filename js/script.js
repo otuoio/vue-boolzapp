@@ -29,14 +29,20 @@
 
 //BONUS 6 - sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
 
+//BONUS 7 - dare la possibilità all'utente di cancellare tutti i messaggi di un contatto o di cancellare l'intera chat con tutti i suoi dati: cliccando sull'icona con i tre pallini in alto a destra, si apre un dropdown menu in cui sono presenti le voci "Elimina messaggi" ed "Elimina chat"; cliccando su di essi si cancellano rispettivamente tutti i messaggi di quel contatto (quindi rimane la conversazione vuota) oppure l'intera chat comprensiva di tutti i dati del contatto oltre che tutti i suoi messaggi (quindi sparisce il contatto anche dalla lista di sinistra)
+
+
 const app = new Vue (
     {
         el: '#app',
         data: {
             counter: 0,
+            contactsItem: '',
             searchChat: '',
             newMsg: '',
             accessText: '',
+            // variabile per mostrare il dropdown menu della chat
+            dropdownMenu: false,
             //predisporre una lista di frasi e/o citazioni
             pcAnswers: [
                 'vai a mangiare il sapone',
@@ -46,7 +52,154 @@ const app = new Vue (
                 'non ti va mai bene niente',
                 'salutameli'
             ],
-            contacts: [
+            contacts: []
+        },
+        methods: {
+            changeChat: function(index) {
+
+                this.counter = index;
+                
+            },
+            newMessage: function (array) {// Milestone 3
+    
+                if (this.newMsg.trim().length > 0) {// BONUS 1 - evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
+
+                    let dateTime = new Date();
+
+                    let obj = {
+                        date: dateTime.toString().substr(5, 18),
+                        text: this.newMsg,
+                        status: "sent",
+                        showInfo: false
+                    };
+                    
+                    //scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
+
+                    // creare funzione che seleziona un indice random
+                    
+                    function getRandomIntInclusive(min, max) {
+                        min = Math.ceil(min);
+                        max = Math.floor(max);
+                        return Math.floor(Math.random() * (max - min + 1) + min);
+                    }
+
+                    // creare variabile che contiene l'elemento random selezionato
+                    const answer = this.pcAnswers[getRandomIntInclusive(0, this.pcAnswers.length - 1)];
+
+                    const obj2 = {
+                        date: dateTime.toString().substr(5, 18),
+                        text: answer,
+                        status: "received",
+                        showInfo: false
+                    };
+        
+                    array.push(obj);
+    
+                    setTimeout(() => {
+                        array.push(obj2);
+                    }, 4000);
+    
+                    this.newMsg = '';
+                }
+                
+            },
+            access: function (contact) { //BONUS 6 - sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
+                
+                setTimeout(() => {
+                    
+                    contact.accessVisible = false;
+    
+                    contact.writingOnline = true;
+
+                    this.accessText = 'sta scrivendo...';
+
+                    setTimeout(() => {
+                        
+                        this.accessText = 'online';
+
+                        setTimeout(() => {
+                            contact.accessVisible = true;
+
+                            contact.writingOnline = false;
+                        }, 2000);
+
+                    }, 3000);
+
+                }, 1000);
+
+            },
+            search: function () { // Milestone 4
+
+                // imposto visible true di default
+                this.contacts.forEach((contact, index) => {
+                    contact.visible = true;
+                });
+
+                // creazione array con soli nomi
+                let namesArray = this.contacts.map((contact) => {
+
+                    return contact.name;
+
+                });
+                
+                // creazione array dei nomi filtrati tramite la barra di ricerca
+                let filteredNames = [];
+
+                namesArray.forEach((element, index) => {
+                    if (element.toLowerCase().includes(this.searchChat.toLowerCase())) {
+                        filteredNames.push(element);
+                    }
+                });
+
+                // cambio variabile visible ai contact che non sono presenti nell'array filtrato
+                this.contacts.forEach((contact, index) => {
+                    if (!filteredNames.includes(contact.name)) {
+                        contact.visible = false;
+                    };
+                });
+            },
+            deleteMsg: function (array, index) { // Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
+                
+                array.splice(index, 1);
+            },
+            emptyArray: function (array) { //cliccando su di essi si cancellano rispettivamente tutti i messaggi di quel contatto (quindi rimane la conversazione vuota)
+
+                // svuota array
+                while (array.length > 0) {
+                    array.pop();
+                }
+            },
+            deleteChat: function (array, index) {
+                if (array.length > 0) {
+                    array.splice(index, 1);
+                } else {
+                    array = [];
+                }
+            },
+            textLive: function (contact) {// Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
+
+                let textMsg = '';
+
+                if (contact.messages.length > 0) {
+                    textMsg = contact.messages[contact.messages.length - 1].text;
+                }
+                
+                return textMsg;
+            },
+            timeLive: function (contact) {
+
+                let timeMsg = '';
+
+                if (contact.messages.length > 0) {
+                    timeMsg = contact.messages[contact.messages.length - 1].date;
+                }
+                
+                return timeMsg;
+            }
+        },
+        created() {
+            
+            this.contacts = [
                 {
                     name: "Michele",
                     avatar: "_1",
@@ -235,136 +388,10 @@ const app = new Vue (
                     ],
                 }
             ]
-        },
-        methods: {
-            add: function(index) {
-                this.counter = index;
-            },
-            newMessage: function (array) {// Milestone 3
-    
-                if (this.newMsg.trim().length > 0) {// BONUS 1 - evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
 
-                    let dateTime = new Date();
-
-                    let obj = {
-                        date: dateTime.toString().substr(5, 18),
-                        text: this.newMsg,
-                        status: "sent",
-                        showInfo: false
-                    };
-                    
-                    //scegliere una frase random dalla lista e utilizzarla come testo del messaggio di risposta del pc
-
-                    // creare funzione che seleziona un indice random
-                    
-                    function getRandomIntInclusive(min, max) {
-                        min = Math.ceil(min);
-                        max = Math.floor(max);
-                        return Math.floor(Math.random() * (max - min + 1) + min);
-                    }
-
-                    // creare variabile che contiene l'elemento random selezionato
-                    const answer = this.pcAnswers[getRandomIntInclusive(0, this.pcAnswers.length - 1)];
-
-                    const obj2 = {
-                        date: dateTime.toString().substr(5, 18),
-                        text: answer,
-                        status: "received",
-                        showInfo: false
-                    };
-        
-                    array.push(obj);
-    
-                    setTimeout(() => {
-                        array.push(obj2);
-                    }, 4000);
-    
-                    this.newMsg = '';
-                }
-                
-            },
-            access: function (contact) { //BONUS 6 - sotto al nome del contatto nella parte in alto a destra, cambiare l'indicazione dello stato: visualizzare il testo "sta scrivendo..." nel timeout in cui il pc risponde, poi mantenere la scritta "online" per un paio di secondi e infine visualizzare "ultimo accesso alle xx:yy" con l'orario corretto
-                
-                setTimeout(() => {
-                    
-                    contact.accessVisible = false;
-    
-                    contact.writingOnline = true;
-
-                    this.accessText = 'sta scrivendo...';
-
-                    setTimeout(() => {
-                        
-                        this.accessText = 'online';
-
-                        setTimeout(() => {
-                            contact.accessVisible = true;
-
-                            contact.writingOnline = false;
-                        }, 2000);
-
-                    }, 3000);
-
-                }, 1000);
-
-            },
-            search: function () { // Milestone 4
-
-                // imposto visible true di default
-                this.contacts.forEach((contact, index) => {
-                    contact.visible = true;
-                });
-
-                // creazione array con soli nomi
-                let namesArray = this.contacts.map((contact) => {
-
-                    return contact.name;
-
-                });
-                
-                // creazione array dei nomi filtrati tramite la barra di ricerca
-                let filteredNames = [];
-
-                namesArray.forEach((element, index) => {
-                    if (element.toLowerCase().includes(this.searchChat.toLowerCase())) {
-                        filteredNames.push(element);
-                    }
-                });
-
-                // cambio variabile visible ai contact che non sono presenti nell'array filtrato
-                this.contacts.forEach((contact, index) => {
-                    if (!filteredNames.includes(contact.name)) {
-                        contact.visible = false;
-                    };
-                });
-            },
-            deleteMsg: function (array, index) { // Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
-                
-                array.splice(index, 1);
-            },
-            textLive: function (contact) {// Visualizzazione ora e ultimo messaggio inviato / ricevuto nella lista dei contatti
-
-                let textMsg = '';
-
-                if (contact.messages.length > 0) {
-                    textMsg = contact.messages[contact.messages.length - 1].text;
-                }
-                
-                return textMsg;
-            },
-            timeLive: function (contact) {
-
-                let timeMsg = '';
-
-                if (contact.messages.length > 0) {
-                    timeMsg = contact.messages[contact.messages.length - 1].date;
-                }
-                
-                return timeMsg;
-            }
-        },
-        created() {
-            
+            // if (this.contacts.length > 0) {
+            //     this.contactsItem = this.contacts[this.counter];
+            // }
             
         }
     }

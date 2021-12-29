@@ -60,7 +60,7 @@
 
                     <div class="nav-menu-chats">
                         <ul>
-                            <li v-show="contact.visible" @click="add(index)" :class="(index == counter) ? 'selected' : '' " v-for="(contact, index) in contacts" class="nav-menu-item">
+                            <li v-show="contact.visible" @click="changeChat(index)" :class="(index == counter) ? 'selected' : '' " v-for="(contact, index) in contacts" class="nav-menu-item">
                                 <div class="menu-avatar">
                                     <img :src='`img/avatar${contact.avatar}.jpg`' :alt='`${contact.name}`'>
                                 </div>
@@ -84,7 +84,7 @@
 
             <!-- side chat -->
             <div class="chat">
-                <div class="chat-header">
+                <div v-if="contacts.length > 0" class="chat-header">
                     <div class="chat-avatar-info">
                         <div class="chat-avatar">
                             <img :src='`img/avatar${contacts[counter].avatar}.jpg`' alt='`${contacts[counter].name}`'>
@@ -101,11 +101,20 @@
                     <div class="chat-tool-bar">
                         <i class="fas fa-search"></i>
                         <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-ellipsis-v"></i>
+
+                        <!-- cliccando sull'icona con i tre pallini in alto a destra, si apre un dropdown menu in cui sono presenti le voci "Elimina
+                        messaggi" ed "Elimina chat" -->
+                        <i @click="dropdownMenu = !dropdownMenu" class="fas fa-ellipsis-v"></i>
+                        <div v-show="dropdownMenu" class="info-box">
+                            <ul>
+                                <li @click="emptyArray(contacts[counter].messages)">Elimina messaggi</li>
+                                <li @click="deleteChat(contacts, counter)">Elimina chat</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="chat-content">
+                <div v-if="contacts.length > 0" class="chat-content">
                     <div v-for="(message, index) in contacts[counter].messages" :class="(message.status == 'received') ? 'received' : 'sent' " class="message-box">
                         <span @click="message.showInfo = !message.showInfo" class="tools-message"><i class="fas fa-angle-down"></i></span>
                         <div v-show="message.showInfo" class="info-box">
@@ -119,8 +128,8 @@
                     </div>
                 </div>
 
-                <div class="chat-text">
-                    <i class="far fa-smile"></i>
+                <div v-if="contacts.length > 0" class="chat-text">
+                    <i v-if="contacts.length > 0" class="far fa-smile"></i>
                     <input @keyup.enter="newMessage(contacts[counter].messages), access(contacts[counter])" type="text" placeholder="Scrivi un messaggio" v-model="newMsg">
 
                     <!-- BONUS 2 - A) cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio) finché l'utente sta scrivendo: di default si visualizza l'icona del microfono, quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono. B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano -->
