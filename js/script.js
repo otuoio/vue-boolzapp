@@ -195,6 +195,28 @@ const app = new Vue (
                 }
                 
                 return timeMsg;
+            },
+            lastAccessTime: function (contact) { //funzione per visualizzare ora ultimo accesso
+                
+                // creare un arrai vuoto che dovrà contenere solo i messaggi ricevuti per ogni contatto
+                let receivedMsgArray = [];
+
+                // pushare i messaggi ricevuti nell'array
+                contact.messages.forEach((message) => {
+                    if (message.status == 'received') {
+                        receivedMsgArray.push(message);
+                    }
+                });
+
+                let timeMsg = '';
+
+                // prendere l'ora dell'ultimo messaggio ricevuto
+                if (receivedMsgArray.length > 0) {
+                    timeMsg = receivedMsgArray[receivedMsgArray.length - 1].date;
+                }
+
+                return timeMsg;
+
             }
         },
         created() {
@@ -389,9 +411,16 @@ const app = new Vue (
                 }
             ]
 
-            // if (this.contacts.length > 0) {
-            //     this.contactsItem = this.contacts[this.counter];
-            // }
+            // let messages = this.contacts.map((contact) => {
+            //     // return contact.messages;
+            //     console.log(contact.messages);
+            // });
+
+            // this.contacts.forEach((contact, index) => {
+            //     contact.messages.forEach((message) => {
+            //         console.log(message.status);
+            //     });
+            // });
             
         }
     }
