@@ -40,7 +40,7 @@ html {
     width: 80%;
     min-width: 800px;
     margin: auto;
-    background-color: pink;
+    background-color: rgba(1, 102, 1, 1);
 }
 
 /* navbar */
@@ -220,6 +220,21 @@ html {
     font-size: .9em;
     font-weight: 400;
     color: var(--gray-color);
+}
+
+/* open-box */
+.open-box {
+    float: left;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.open-box .open-msg {
+    font-size: 1em;
+    color: rgb(33, 0, 124);
 }
 
 /* chat */

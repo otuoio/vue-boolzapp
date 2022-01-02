@@ -82,8 +82,15 @@
             </div>
             <!-- /side navbar -->
 
+            <!-- BONUS 8 - visualizzare un messaggio di benvenuto che invita l'utente a selezionare un contatto dalla lista per
+            visualizzare i suoi messaggi, anziché attivare di default la prima conversazione -->
+            <div v-if="counter == null" class="open-box">
+                <h2 class="open-msg">Seleziona un contatto dalla lista per visualizzare la chat</h2>
+            </div>
+            <!-- /BONUS 8 -->
+
             <!-- side chat -->
-            <div v-if="contacts.length > 0" class="chat">
+            <div v-if="contacts.length > 0 && counter != null" class="chat">
                 <div  class="chat-header">
                     <div class="chat-avatar-info">
                         <div class="chat-avatar">
