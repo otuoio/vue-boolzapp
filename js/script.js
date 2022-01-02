@@ -33,11 +33,13 @@
 
 //BONUS 8 - visualizzare un messaggio di benvenuto che invita l'utente a selezionare un contatto dalla lista per visualizzare i suoi messaggi, anziché attivare di default la prima conversazione
 
+//BONUS 9 - aggiungere una splash page visibile per 1s all'apertura dell'app
 
 const app = new Vue (
     {
         el: '#app',
         data: {
+            splashPage: true,
             counter: null,
             contactsItem: '',
             searchChat: '',
@@ -413,16 +415,10 @@ const app = new Vue (
                 }
             ]
 
-            // let messages = this.contacts.map((contact) => {
-            //     // return contact.messages;
-            //     console.log(contact.messages);
-            // });
-
-            // this.contacts.forEach((contact, index) => {
-            //     contact.messages.forEach((message) => {
-            //         console.log(message.status);
-            //     });
-            // });
+        //    modificare la visibilità della splash page
+        setTimeout(() => {
+            this.splashPage = false;
+        }, 2000);
             
         }
     }

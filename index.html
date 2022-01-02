@@ -25,6 +25,12 @@
 <body>
 
     <div id="app" class="container">
+
+        <!-- BONUS 9 - aggiungere una splash page visibile per 1s all'apertura dell'app -->
+        <div v-show="splashPage" class="splash-page">
+            <h1 class="splash-text">Benvenut&#601; su Boolzapp</h1>
+        </div>
+
         <div class="chat-container clearfix">
 
             <!-- side navbar -->
@@ -87,7 +93,6 @@
             <div v-if="counter == null" class="open-box">
                 <h2 class="open-msg">Seleziona un contatto dalla lista per visualizzare la chat</h2>
             </div>
-            <!-- /BONUS 8 -->
 
             <!-- side chat -->
             <div v-if="contacts.length > 0 && counter != null" class="chat">
