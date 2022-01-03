@@ -92,7 +92,7 @@
 
             <!-- BONUS 8 - visualizzare un messaggio di benvenuto che invita l'utente a selezionare un contatto dalla lista per
             visualizzare i suoi messaggi, anziché attivare di default la prima conversazione -->
-            <div v-if="counter == null" class="open-box">
+            <div v-if="counter == null" :class="{'bg-dark': darkMode}" class="open-box">
                 <h2 class="open-msg">Seleziona un contatto dalla lista per visualizzare la chat</h2>
             </div>
 
@@ -129,7 +129,7 @@
                 </div>
                 
                 <div  class="chat-content" :class="{'chat-content-dark': darkMode}">
-                    <div v-for="(message, index) in contacts[counter].messages" :class="(message.status == 'received') ? 'received' : 'sent' " class="message-box">
+                    <div v-for="(message, index) in contacts[counter].messages" :class="[(message.status == 'received') ? 'received' : 'sent', (message.status == 'received' && darkMode == true) ? 'received-dark' : '', (message.status == 'sent' && darkMode == true) ? 'sent-dark' : '']" class="message-box">
                         <span @click="message.showInfo = !message.showInfo" class="tools-message"><i class="fas fa-angle-down"></i></span>
                         <div v-show="message.showInfo" class="info-box">
                             <ul>

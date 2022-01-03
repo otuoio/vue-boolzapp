@@ -458,11 +458,22 @@ html {
     color: white;
 }
 
+.sent-dark {
+    background-color: var(--bg-green);
+    align-self: flex-end;
+    color: white;
+}
+.received-dark {
+    background-color: var(--bg-dark);
+    align-self: flex-start;
+    color: white;
+}
+
 .chat .chat-content-dark {
     background-image: url(../img/bg-dark.jpeg);
     background-position: center;
     background-repeat: repeat;
-    background-size: content;
+    background-size: contain;
 }
 
 .tool-bar .dark-switch {
