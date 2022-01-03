@@ -34,13 +34,14 @@
         <div class="chat-container clearfix">
 
             <!-- side navbar -->
-            <div class="navbar">
-                <div class="nav-header">
+            <div class="navbar" :class="{'bg-dark': darkMode}">
+                <div class="nav-header" :class="{'bg-dark': darkMode, 'text-white': darkMode}">
                     <div class="my-avatar">
                         <img src="img/avatar_io.jpg" alt="">
                     </div>
                     <h4 class="name">Nome Utente</h4>
                     <div class="tool-bar">
+                        <i @click="darkMode = ! darkMode" class="fas fa-adjust" :class="{'dark-switch': darkMode}"></i>
                         <i class="fas fa-circle-notch"></i>
                         <i class="fas fa-comment-alt"></i>
                         <i class="fas fa-ellipsis-v"></i>
@@ -59,14 +60,15 @@
 
                 <div class="nav-menu">
 
-                    <div class="nav-menu-search">
+                    <div class="nav-menu-search" :class="{'bg-little-darker': darkMode}">
                         <i class="fas fa-search"></i>
-                        <input @keyup="search" type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchChat">
+                        <input :class="{'bg-darker': darkMode, 'text-gray': darkMode}" @keyup="search" type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchChat">
                     </div>
 
-                    <div class="nav-menu-chats">
+                    <div class="nav-menu-chats" :class="{'bg-darker': darkMode, 'text-white': darkMode}">
                         <ul>
-                            <li v-show="contact.visible" @click="changeChat(index)" :class="(index == counter) ? 'selected' : '' " v-for="(contact, index) in contacts" class="nav-menu-item">
+                            <li tabindex="0" v-show="contact.visible" @click="changeChat(contact, index)"
+                            v-for="(contact, index) in contacts" class="nav-menu-item" :class="{'bg-darker': darkMode, 'text-white': darkMode}">
                                 <div class="menu-avatar">
                                     <img :src='`img/avatar${contact.avatar}.jpg`' :alt='`${contact.name}`'>
                                 </div>
@@ -96,7 +98,7 @@
 
             <!-- side chat -->
             <div v-if="contacts.length > 0 && counter != null" class="chat">
-                <div  class="chat-header">
+                <div  class="chat-header" :class="{'bg-dark': darkMode, 'text-white': darkMode}">
                     <div class="chat-avatar-info">
                         <div class="chat-avatar">
                             <img :src='`img/avatar${contacts[counter].avatar}.jpg`' alt='`${contacts[counter].name}`'>
@@ -126,7 +128,7 @@
                     </div>
                 </div>
                 
-                <div  class="chat-content">
+                <div  class="chat-content" :class="{'chat-content-dark': darkMode}">
                     <div v-for="(message, index) in contacts[counter].messages" :class="(message.status == 'received') ? 'received' : 'sent' " class="message-box">
                         <span @click="message.showInfo = !message.showInfo" class="tools-message"><i class="fas fa-angle-down"></i></span>
                         <div v-show="message.showInfo" class="info-box">
@@ -140,9 +142,9 @@
                     </div>
                 </div>
 
-                <div  class="chat-text">
+                <div  class="chat-text" :class="{'bg-dark': darkMode, 'text-white': darkMode}">
                     <i  class="far fa-smile"></i>
-                    <input @keyup.enter="newMessage(contacts[counter].messages), access(contacts[counter])" type="text" placeholder="Scrivi un messaggio" v-model="newMsg">
+                    <input :class="{'bg-darker': darkMode, 'text-gray': darkMode}" @keyup.enter="newMessage(contacts[counter].messages), access(contacts[counter])" type="text" placeholder="Scrivi un messaggio" v-model="newMsg">
 
                     <!-- BONUS 2 - A) cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio) finché l'utente sta scrivendo: di default si visualizza l'icona del microfono, quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono. B) inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano -->
 

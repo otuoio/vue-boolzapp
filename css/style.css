@@ -5,6 +5,12 @@
     --bg-azure: #8EDAFC;
     --gray-color:#B1B1B1;
     --bg-chat-green:#D5F9BA;
+
+    /* dark mode colors */
+    --bg-dark: #202C33;
+    --bg-little-darker: #1D282E;
+    --bg-darker: #101D24;
+
 }
 
 * {
@@ -194,7 +200,7 @@ html {
     background-color: rgb(228, 228, 228);
     cursor: pointer;
 }
-.nav-menu-item.selected {
+.nav-menu-item:focus {
     background-color: rgba(180, 180, 180,0.5);
 }
 
@@ -346,6 +352,14 @@ html {
     border-radius: 10px;
     position: relative;
 }
+.sent {
+    background-color: var(--bg-chat-green);
+    align-self: flex-end;
+}
+.received {
+    background-color: whitesmoke;
+    align-self: flex-start;
+}
 
 .tools-message {
     position: absolute;
@@ -394,15 +408,6 @@ html {
     color: var(--gray-color);
 }
 
-.sent {
-    background-color: var(--bg-chat-green);
-    align-self: flex-end;
-}
-.received {
-    background-color: whitesmoke;
-    align-self: flex-start;
-}
-
 /* CHAT TEXT BOX */
 .chat-text {
     height: 60px;
@@ -432,4 +437,34 @@ html {
 }
 .chat-text .send-msg:hover {
     cursor: pointer;
+}
+
+/* BONUS 10 - DARK MODE */
+
+.bg-dark {
+    background-color: var(--bg-dark);
+}
+.bg-little-darker {
+    background-color: var(--bg-little-darker);
+}
+.bg-darker {
+    background-color: var(--bg-darker);
+}
+
+.text-gray {
+    color: lightgray;
+}
+.text-white {
+    color: white;
+}
+
+.chat .chat-content-dark {
+    background-image: url(../img/bg-dark.jpeg);
+    background-position: center;
+    background-repeat: repeat;
+    background-size: content;
+}
+
+.tool-bar .dark-switch {
+    color: var(--bg-azure);
 }
