@@ -23,8 +23,8 @@
     <title>Boolzapp</title>
 </head>
 <body>
-
-    <div id="app" class="container">
+    <!-- BONUS 11 - aggiungere un'icona per ingrandire o rimpicciolire il font -->
+    <div id="app" class="container" :style="{ fontSize: fontSize + 'rem' }">
 
         <!-- BONUS 9 - aggiungere una splash page visibile per 1s all'apertura dell'app -->
         <div v-show="splashPage" class="splash-page">
@@ -113,6 +113,10 @@
                         </div>
                     </div>
                     <div class="chat-tool-bar">
+                        <!-- BONUS 11 - aggiungere un'icona per ingrandire o rimpicciolire il font -->
+                        <i @click="(fontSize > 1) ? fontSize = 1.25 : fontSize += 0.25" class="fas fa-search-plus"></i>
+                        <i @click="(fontSize < 1.25) ? fontSize = 1 : fontSize -= 0.25" class="fas fa-search-minus"></i>
+
                         <i class="fas fa-search"></i>
                         <i class="fas fa-paperclip"></i>
 

@@ -37,10 +37,13 @@
 
 //BONUS 10 - aggiungere un'icona per cambiare la modalità light/dark
 
+//BONUS 11 - aggiungere un'icona per ingrandire o rimpicciolire il font
+
 const app = new Vue (
     {
         el: '#app',
         data: {
+            fontSize: 1,
             splashPage: true,
             darkMode: false,
             counter: null,
